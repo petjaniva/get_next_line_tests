@@ -6,7 +6,7 @@
 /*   By: pniva <pniva@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 10:46:30 by pniva             #+#    #+#             */
-/*   Updated: 2021/12/10 10:45:08 by pniva            ###   ########.fr       */
+/*   Updated: 2021/12/10 12:26:24 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 
 
-static MunitResult	test_empty_file(const MunitParameter params[], void *data)
+static MunitResult	test_empty_lines(const MunitParameter params[], void *data)
 {
 	(void)	params;
 	(void)	data;
@@ -183,14 +183,36 @@ static MunitResult	test_error_handling(const MunitParameter params[], void *data
 	return MUNIT_OK;
 }
 
+static MunitResult	test_empty_file(const MunitParameter params[], void *data)
+{
+	(void)	params;
+	(void)	data;
+	int		fd;
+	char	*line;
+	int		gnl_return;
+
+	fd = -1;
+	gnl_return = get_next_line(fd, &line);
+	munit_assert_int(gnl_return, ==, -1);
+
+	line = ft_strdup("hello");
+	fd = open("empty_file", O_RDONLY);
+	gnl_return = get_next_line(fd, &line);
+	munit_assert_int(gnl_return, ==, 0);
+	munit_assert_string_equal("hello", line);
+	
+	return MUNIT_OK;
+}
+
 
 static MunitTest test_suite_tests[] =
 {
-	{(char *) "/empty_file", test_empty_file, 0, 0, 0, 0},
+	{(char *) "/test_empty_lines", test_empty_lines, 0, 0, 0, 0},
 	{(char *) "/test_one_long_line", test_one_long_line, 0, 0, 0, 0},
 	{(char *) "/test_many_lines", test_many_lines_variable_length, 0, 0, 0, 0},
 	{(char *) "/test_two_files", test_open_another_file, 0, 0, 0, 0},
 	{(char *) "/test_error_handling", test_error_handling, 0, 0, 0, 0},
+	{(char *) "/test_empty_file", test_empty_file, 0, 0, 0, 0},
 	{0, 0, 0, 0, 0, 0}
 };
 
