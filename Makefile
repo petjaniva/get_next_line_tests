@@ -6,7 +6,7 @@
 #    By: pniva <pniva@student.hive.fi>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/09 14:08:13 by pniva             #+#    #+#              #
-#    Updated: 2021/12/09 14:13:45 by pniva            ###   ########.fr        #
+#    Updated: 2021/12/14 12:27:43 by pniva            ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -27,6 +27,8 @@ all: $(NAME)
 $(NAME):
 		@$(CC) $(CFLAGS) $(SRCS) -o $(NAME)
 
+stdin:
+		@$(CC) $(CFLAGS) stdin_test.c libft/libft.a get_next_line.c -o stdin.out
 clean:
 		@rm -f $(OBJS)
 
