@@ -6,7 +6,7 @@
 /*   By: pniva <pniva@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 09:16:16 by pniva             #+#    #+#             */
-/*   Updated: 2021/12/14 12:24:53 by pniva            ###   ########.fr       */
+/*   Updated: 2021/12/15 10:40:28 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,11 @@ int		main(int argc, char **argv)
 	while (get_next_line(fd, &line) == 1)
 	{
 		write(fd_output, line, ft_strlen(line));
-		write(fd_output, '/n', 1);
+//		write(fd_output, "\n", 1);
 		free(line);
 	}
 	close(fd);
+	close(fd_output);
 	
 	return (0);
 }
