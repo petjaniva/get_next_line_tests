@@ -6,7 +6,7 @@
 #    By: pniva <pniva@student.hive.fi>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/09 14:08:13 by pniva             #+#    #+#              #
-#    Updated: 2021/12/15 11:18:39 by pniva            ###   ########.fr        #
+#    Updated: 2021/12/15 12:36:07 by pniva            ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -29,6 +29,12 @@ $(NAME):
 		make -C ../libft/ fclean && make -C ../libft/
 		@$(CC) $(CFLAGS) $(SRCS) $(INCLUDES) -o $(NAME)
 		./$(NAME)
+
+leaks:
+		$(CC) $(CFLAGS) leaks_test.c ../get_next_line.c $(INCLUDES) -o leaks_test.out
+
+test_leaks:
+		valgrind --leak-check=full -v ./leaks_test.out
 
 stdin:
 		@$(CC) $(CFLAGS) stdin_test.c ../get_next_line.c ../libft/libft.a \
