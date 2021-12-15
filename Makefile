@@ -6,7 +6,7 @@
 #    By: pniva <pniva@student.hive.fi>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/09 14:08:13 by pniva             #+#    #+#              #
-#    Updated: 2021/12/15 11:06:50 by pniva            ###   ########.fr        #
+#    Updated: 2021/12/15 11:18:39 by pniva            ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -14,29 +14,34 @@
 SRCS = test_files.c \
 		../get_next_line.c \
 		munit.c \
-		../libft/libft.a
 
 NAME = test.out
 
 CC = gcc
 
-CFLAGS = -Wall -Werror -Wextra -I ../ -I ../libft/includes
+CFLAGS = -Wall -Werror -Wextra
 
-all:	 $(NAME)
+INCLUDES = -I ../ -I ../libft/includes -L ../libft -lft
 
-libft: 
-		make -C ../libft/
+all:	 $(NAME) stdin
 
 $(NAME):
-		@$(CC) $(CFLAGS) $(SRCS) -o $(NAME)
+		make -C ../libft/ fclean && make -C ../libft/
+		@$(CC) $(CFLAGS) $(SRCS) $(INCLUDES) -o $(NAME)
+		./$(NAME)
 
 stdin:
-		@$(CC) $(CFLAGS) stdin_test.c ../get_next_line.c ../libft/libft.a -o stdin.out
+		@$(CC) $(CFLAGS) stdin_test.c ../get_next_line.c ../libft/libft.a \
+		$(INCLUDES) -o stdin.out
+		cat test_one_long_line | ./stdin.out
+		diff test_one_long_line stdin_output
 
 clean:
-		@rm -f $(OBJS)
+		make -C ../libft clean
+		rm -f stdin_output
 
 fclean: clean
 		@rm -f $(NAME)
+		@rm -f stdin.out
 
 re: fclean all
