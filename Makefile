@@ -6,14 +6,15 @@
 #    By: pniva <pniva@student.hive.fi>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/09 14:08:13 by pniva             #+#    #+#              #
-#    Updated: 2021/12/15 10:46:43 by pniva            ###   ########.fr        #
+#    Updated: 2021/12/15 11:06:50 by pniva            ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 
 SRCS = test_files.c \
 		../get_next_line.c \
-		munit.c 
+		munit.c \
+		../libft/libft.a
 
 NAME = test.out
 
@@ -30,7 +31,7 @@ $(NAME):
 		@$(CC) $(CFLAGS) $(SRCS) -o $(NAME)
 
 stdin:
-		@$(CC) $(CFLAGS) stdin_test.c ../libft/libft.a ../get_next_line.c -o stdin.out
+		@$(CC) $(CFLAGS) stdin_test.c ../get_next_line.c ../libft/libft.a -o stdin.out
 
 clean:
 		@rm -f $(OBJS)
