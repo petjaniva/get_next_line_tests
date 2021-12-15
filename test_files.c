@@ -6,12 +6,11 @@
 /*   By: pniva <pniva@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 10:46:30 by pniva             #+#    #+#             */
-/*   Updated: 2021/12/10 12:26:24 by pniva            ###   ########.fr       */
+/*   Updated: 2021/12/15 09:11:01 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "munit.h"
-#include "libft/libft.h"
 #include <strings.h>
 #include <ctype.h>
 #include <limits.h>
@@ -60,7 +59,7 @@ static MunitResult	test_one_long_line(const MunitParameter params[], void *data)
 	gnl_return = get_next_line(fd, &line);
 	munit_assert_int(gnl_return, ==, 1);
 	munit_assert_char(line[0], ==, 'J');
-	munit_assert_char(line[ft_strlen(line) - 1], ==, '.');
+	munit_assert_char(line[strlen(line) - 1], ==, '.');
 	free(line);
 
 	gnl_return = get_next_line(fd, &line);
@@ -85,37 +84,37 @@ static MunitResult	test_many_lines_variable_length(const MunitParameter params[]
 	gnl_return = get_next_line(fd, &line);
 	munit_assert_int(gnl_return, ==, 1);
 	munit_assert_char(line[2], ==, 'e');
-	munit_assert_char(line[ft_strlen(line) - 1], ==,  ',');
+	munit_assert_char(line[strlen(line) - 1], ==,  ',');
 
 	gnl_return = get_next_line(fd, &line);
 	munit_assert_int(gnl_return, ==, 1);
 	munit_assert_char(line[0], ==, 'f');
-	munit_assert_char(line[ft_strlen(line) - 1], ==, 't');
-	munit_assert_null(ft_strchr(line, '\n'));
+	munit_assert_char(line[strlen(line) - 1], ==, 't');
+	munit_assert_null(strchr(line, '\n'));
 
 	gnl_return = get_next_line(fd, &line);
 	munit_assert_string_equal("King Aegon II’s behest.", line);
-	munit_assert_null(ft_strchr(line, '\n'));
+	munit_assert_null(strchr(line, '\n'));
 
 	gnl_return = get_next_line(fd, &line);
-	munit_assert_null(ft_strchr(line, '\n'));
+	munit_assert_null(strchr(line, '\n'));
 
 	gnl_return = get_next_line(fd, &line);
-	munit_assert_null(ft_strchr(line, '\n'));
+	munit_assert_null(strchr(line, '\n'));
 
 	gnl_return = get_next_line(fd, &line);
-	munit_assert_null(ft_strchr(line, '\n'));
+	munit_assert_null(strchr(line, '\n'));
 
 	gnl_return = get_next_line(fd, &line);
-	munit_assert_null(ft_strchr(line, '\n'));
+	munit_assert_null(strchr(line, '\n'));
 
 	gnl_return = get_next_line(fd, &line);
-	munit_assert_null(ft_strchr(line, '\n'));
+	munit_assert_null(strchr(line, '\n'));
 
 	gnl_return = get_next_line(fd, &line);
-	munit_assert_null(ft_strchr(line, '\n'));
+	munit_assert_null(strchr(line, '\n'));
 	munit_assert_char(line[0], ==, 'o');
-	munit_assert_char(line[ft_strlen(line) - 1], ==,  '.');
+	munit_assert_char(line[strlen(line) - 1], ==,  '.');
 
 	gnl_return = get_next_line(fd, &line);
 	munit_assert_int(gnl_return, ==, 0);
@@ -136,7 +135,7 @@ static MunitResult	test_open_another_file(const MunitParameter params[], void *d
 	gnl_return = get_next_line(fd, &line);
 	munit_assert_int(gnl_return, ==, 1);
 	munit_assert_char(line[0], ==, 'J');
-	munit_assert_char(line[ft_strlen(line) - 1], ==, '.');
+	munit_assert_char(line[strlen(line) - 1], ==, '.');
 
 	gnl_return = get_next_line(fd, &line);
 	munit_assert_int(gnl_return, ==, 0);
@@ -195,7 +194,7 @@ static MunitResult	test_empty_file(const MunitParameter params[], void *data)
 	gnl_return = get_next_line(fd, &line);
 	munit_assert_int(gnl_return, ==, -1);
 
-	line = ft_strdup("hello");
+	line = strdup("hello");
 	fd = open("empty_file", O_RDONLY);
 	gnl_return = get_next_line(fd, &line);
 	munit_assert_int(gnl_return, ==, 0);
