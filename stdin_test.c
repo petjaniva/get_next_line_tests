@@ -6,12 +6,11 @@
 /*   By: pniva <pniva@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 09:16:16 by pniva             #+#    #+#             */
-/*   Updated: 2021/12/16 10:07:16 by pniva            ###   ########.fr       */
+/*   Updated: 2021/12/16 13:14:10 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fcntl.h>
-#include "./libft/libft.h"
 #include "get_next_line.h"
 #include <stdio.h>
 

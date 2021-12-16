@@ -6,7 +6,7 @@
 #    By: pniva <pniva@student.hive.fi>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/09 14:08:13 by pniva             #+#    #+#              #
-#    Updated: 2021/12/16 12:54:41 by pniva            ###   ########.fr        #
+#    Updated: 2021/12/16 13:15:01 by pniva            ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -30,9 +30,9 @@ CFLAGS = -Wall -Werror -Wextra
 
 INCLUDES = -I ../ -I ../libft/includes -L ../libft -lft
 
-all:	 $(EXTRA) $(STDIN) $(LEAKS) $(FORM) $(MULTI_FD)
+all:	 $(EXTRA) $(STDIN) $(LEAKS) $(FORM) $(MULTI_FD) $(ERROR)
 
-test_all: basic middle advanced error test_leaks test_stdin test_multi_fd
+test_all: basic middle advanced error leaks stdin multi_fd
 
 $(EXTRA):
 		make -C ../libft/ fclean && make -C ../libft/
@@ -41,13 +41,13 @@ $(EXTRA):
 $(LEAKS):
 		$(CC) $(CFLAGS) leaks_test.c $(SRCS) $(INCLUDES) -o $(LEAKS)
 
-test_leaks:
+leaks:
 		valgrind --leak-check=full ./$(LEAKS)
 
 $(STDIN):
 		$(CC) $(CFLAGS) stdin_test.c $(SRCS) $(INCLUDES) -o $(STDIN)
 
-test_stdin:
+stdin:
 		cat ./test_files/test_one_long_line | ./$(STDIN)
 		@diff ./test_files/test_one_long_line stdin_output
 		@cmp -s ./test_files/test_one_long_line stdin_output; \
@@ -64,7 +64,7 @@ $(FORM):
 $(MULTI_FD):
 		$(CC) $(CFLAGS) multi_fd_test.c $(SRCS) $(INCLUDES) -o $(MULTI_FD)
 
-test_multi_fd:
+multi_fd:
 		./$(MULTI_FD)
 
 basic:
