@@ -6,7 +6,7 @@
 /*   By: pniva <pniva@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 12:14:18 by pniva             #+#    #+#             */
-/*   Updated: 2021/12/15 12:30:03 by pniva            ###   ########.fr       */
+/*   Updated: 2021/12/16 12:50:39 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int		main(int argc, char **argv)
 	(void)	argc;
 	(void)	argv;
 	
-	fd = open("test_many_lines_variable_length", O_RDONLY);
+	fd = open("./test_files/test_many_lines_variable_length", O_RDONLY);
 	while (get_next_line(fd, &line) == 1)
 	{
 		free(line);

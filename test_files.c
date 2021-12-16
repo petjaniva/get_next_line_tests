@@ -6,7 +6,7 @@
 /*   By: pniva <pniva@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 10:46:30 by pniva             #+#    #+#             */
-/*   Updated: 2021/12/16 11:24:32 by pniva            ###   ########.fr       */
+/*   Updated: 2021/12/16 12:51:43 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static MunitResult	test_empty_lines(const MunitParameter params[], void *data)
 	char	*line;
 	int		gnl_return;
 	
-	fd = open("test_file_empty_lines", O_RDONLY);
+	fd = open("./test_files/test_file_empty_lines", O_RDONLY);
 	gnl_return = get_next_line(fd, &line);
 	munit_assert_int(1, ==, gnl_return);
 	munit_assert_string_equal("", line);
@@ -55,7 +55,7 @@ static MunitResult	test_one_long_line(const MunitParameter params[], void *data)
 	char	*line;
 	int		gnl_return;
 
-	fd = open("test_one_long_line", O_RDONLY);
+	fd = open("./test_files/test_one_long_line", O_RDONLY);
 	gnl_return = get_next_line(fd, &line);
 	munit_assert_int(gnl_return, ==, 1);
 	munit_assert_char(line[0], ==, 'J');
@@ -79,7 +79,7 @@ static MunitResult	test_many_lines_variable_length(const MunitParameter params[]
 	int		gnl_return;
 
 
-	fd = open("test_many_lines_variable_length", O_RDONLY);
+	fd = open("./test_files/test_many_lines_variable_length", O_RDONLY);
 
 	gnl_return = get_next_line(fd, &line);
 	munit_assert_int(gnl_return, ==, 1);
@@ -131,7 +131,7 @@ static MunitResult	test_open_another_file(const MunitParameter params[], void *d
 	char	*line;
 	int		gnl_return;
 
-	fd = open("test_one_long_line", O_RDONLY);
+	fd = open("./test_files/test_one_long_line", O_RDONLY);
 	gnl_return = get_next_line(fd, &line);
 	munit_assert_int(gnl_return, ==, 1);
 	munit_assert_char(line[0], ==, 'J');
@@ -142,7 +142,7 @@ static MunitResult	test_open_another_file(const MunitParameter params[], void *d
 
 	close(fd);
 
-	fd = open("test_file_empty_lines", O_RDONLY);
+	fd = open("./test_files/test_file_empty_lines", O_RDONLY);
 	gnl_return = get_next_line(fd, &line);
 	munit_assert_int(1, ==, gnl_return);
 	munit_assert_string_equal("", line);
@@ -176,7 +176,7 @@ static MunitResult	test_error_handling(const MunitParameter params[], void *data
 	munit_assert_int(gnl_return, ==, -1);
 
 	
-	fd = open("test_file_empty_lines", O_RDONLY);
+	fd = open("./test_files/test_file_empty_lines", O_RDONLY);
 	gnl_return = get_next_line(fd, NULL);
 	munit_assert_int(gnl_return, ==, -1);
 
@@ -200,7 +200,7 @@ static MunitResult	test_empty_file(const MunitParameter params[], void *data)
 	munit_assert_int(gnl_return, ==, -1);
 
 	line = strdup("hello");
-	fd = open("empty_file", O_RDONLY);
+	fd = open("./test_files/empty_file", O_RDONLY);
 	gnl_return = get_next_line(fd, &line);
 	munit_assert_int(gnl_return, ==, 0);
 	munit_assert_string_equal("hello", line);

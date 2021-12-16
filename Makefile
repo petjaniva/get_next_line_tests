@@ -6,7 +6,7 @@
 #    By: pniva <pniva@student.hive.fi>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/09 14:08:13 by pniva             #+#    #+#              #
-#    Updated: 2021/12/16 12:37:04 by pniva            ###   ########.fr        #
+#    Updated: 2021/12/16 12:54:41 by pniva            ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -48,9 +48,9 @@ $(STDIN):
 		$(CC) $(CFLAGS) stdin_test.c $(SRCS) $(INCLUDES) -o $(STDIN)
 
 test_stdin:
-		cat test_one_long_line | ./$(STDIN)
-		@diff test_one_long_line stdin_output
-		@cmp -s test_one_long_line stdin_output; \
+		cat ./test_files/test_one_long_line | ./$(STDIN)
+		@diff ./test_files/test_one_long_line stdin_output
+		@cmp -s ./test_files/test_one_long_line stdin_output; \
 		RETVAL=$$?; \
 		if [ $$RETVAL -eq 0 ]; then \
             echo "OK"; \
@@ -69,31 +69,31 @@ test_multi_fd:
 
 basic:
 		@bash change_buff_size.sh 8
-		cat 1_8_char_line | ./forms_test.out
-		cat 2_8_char_lines | ./forms_test.out
-		cat 4_8_char_lines | ./forms_test.out
-		./forms_test.out 1_8_char_line
-		./forms_test.out 2_8_char_lines
-		./forms_test.out 4_8_char_lines
+		cat ./test_files/1_8_char_line | ./forms_test.out
+		cat ./test_files/2_8_char_lines | ./forms_test.out
+		cat ./test_files/4_8_char_lines | ./forms_test.out
+		./forms_test.out ./test_files/1_8_char_line
+		./forms_test.out ./test_files/2_8_char_lines
+		./forms_test.out ./test_files/4_8_char_lines
 
 middle:
-		cat 1_16_char_line | ./forms_test.out
-		cat 2_16_char_lines | ./forms_test.out
-		cat 4_16_char_lines | ./forms_test.out
-		./forms_test.out 1_16_char_line
-		./forms_test.out 2_16_char_lines
-		./forms_test.out 4_16_char_lines
+		cat ./test_files/1_16_char_line | ./forms_test.out
+		cat ./test_files/2_16_char_lines | ./forms_test.out
+		cat ./test_files/4_16_char_lines | ./forms_test.out
+		./forms_test.out ./test_files/1_16_char_line
+		./forms_test.out ./test_files/2_16_char_lines
+		./forms_test.out ./test_files/4_16_char_lines
 
 advanced:
-		cat 1_4_char_line | ./forms_test.out
-		cat 2_4_char_lines | ./forms_test.out
-		cat 4_4_char_lines | ./forms_test.out
-		./forms_test.out 1_4_char_line
-		./forms_test.out 2_4_char_lines
-		./forms_test.out 4_4_char_lines
-		./forms_test.out 4_chars_no_nl
-		./forms_test.out 8_chars_no_nl
-		./forms_test.out 16_chars_no_nl
+		cat ./test_files/1_4_char_line | ./forms_test.out
+		cat ./test_files/2_4_char_lines | ./forms_test.out
+		cat ./test_files/4_4_char_lines | ./forms_test.out
+		./forms_test.out ./test_files/1_4_char_line
+		./forms_test.out ./test_files/2_4_char_lines
+		./forms_test.out ./test_files/4_4_char_lines
+		./forms_test.out ./test_files/4_chars_no_nl
+		./forms_test.out ./test_files/8_chars_no_nl
+		./forms_test.out ./test_files/16_chars_no_nl
 
 error:
 		@bash change_buff_size.sh 1

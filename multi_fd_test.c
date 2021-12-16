@@ -6,7 +6,7 @@
 /*   By: pniva <pniva@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 11:45:17 by pniva             #+#    #+#             */
-/*   Updated: 2021/12/16 12:30:01 by pniva            ###   ########.fr       */
+/*   Updated: 2021/12/16 12:50:05 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <strings.h>
@@ -42,8 +42,8 @@ int	main(void)
 	int fd2;
 	int fd3;
 
-	fd = open("2_16_char_lines", O_RDONLY);
-	fd2 = open("2_8_char_lines", O_RDONLY);
-	fd3 = open("2_4_char_lines", O_RDONLY);
+	fd = open("./test_files/2_16_char_lines", O_RDONLY);
+	fd2 = open("./test_files/2_8_char_lines", O_RDONLY);
+	fd3 = open("./test_files/2_4_char_lines", O_RDONLY);
 	read_fd(fd, fd2, fd3);
 }
