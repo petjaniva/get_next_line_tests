@@ -1,4 +1,4 @@
-1. Clone into a subfolder in your GNL-project for example: ~/get_next_line/tests/
+1. Clone into a subfolder in your GNL-project folder. For example: ~/get_next_line/tests/
 2. run 'make'
 3. 'make test_all' runs all tests, but there is quite a bit of output so it is hard to read.
 
