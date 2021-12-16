@@ -6,7 +6,7 @@
 #    By: pniva <pniva@student.hive.fi>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/09 14:08:13 by pniva             #+#    #+#              #
-#    Updated: 2021/12/16 13:15:01 by pniva            ###   ########.fr        #
+#    Updated: 2021/12/16 13:18:22 by pniva            ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -22,7 +22,7 @@ STDIN = stdin_test.out
 
 FORM = forms_test.out
 
-MULTI_FD = multi_fd.out
+MULTI_FD = multi_fd_test.out
 
 CC = gcc
 
