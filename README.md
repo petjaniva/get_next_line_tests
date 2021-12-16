@@ -1,6 +1,8 @@
 1. Clone into a subfolder in your GNL-project
 2. run 'make'
 3. 'make test_all' runs all tests, but there is quite a bit of output so it is hard to read.
+
+
 'make basic' runs the basic tests from the evaluation form.
 'make middle' runs the middle tests from the evaluation form.
 'make advanced' runs most of the advanced tests from the evaluation form.
