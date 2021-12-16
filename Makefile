@@ -6,7 +6,7 @@
 #    By: pniva <pniva@student.hive.fi>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/09 14:08:13 by pniva             #+#    #+#              #
-#    Updated: 2021/12/16 11:41:16 by pniva            ###   ########.fr        #
+#    Updated: 2021/12/16 12:37:04 by pniva            ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -22,15 +22,17 @@ STDIN = stdin_test.out
 
 FORM = forms_test.out
 
+MULTI_FD = multi_fd.out
+
 CC = gcc
 
 CFLAGS = -Wall -Werror -Wextra
 
 INCLUDES = -I ../ -I ../libft/includes -L ../libft -lft
 
-all:	 $(EXTRA) $(STDIN) $(LEAKS) $(FORM)
+all:	 $(EXTRA) $(STDIN) $(LEAKS) $(FORM) $(MULTI_FD)
 
-test_all: basic middle advanced error test_leaks test_stdin
+test_all: basic middle advanced error test_leaks test_stdin test_multi_fd
 
 $(EXTRA):
 		make -C ../libft/ fclean && make -C ../libft/
@@ -57,7 +59,13 @@ test_stdin:
 		fi
 
 $(FORM):
-		$(CC) $(CFLAGS) -g form_tests.c $(SRCS) $(INCLUDES) -o $(FORM)
+		$(CC) $(CFLAGS) form_tests.c $(SRCS) $(INCLUDES) -o $(FORM)
+
+$(MULTI_FD):
+		$(CC) $(CFLAGS) multi_fd_test.c $(SRCS) $(INCLUDES) -o $(MULTI_FD)
+
+test_multi_fd:
+		./$(MULTI_FD)
 
 basic:
 		@bash change_buff_size.sh 8
@@ -102,6 +110,6 @@ clean:
 		rm -f stdin_output
 
 fclean: clean
-		rm -f $(EXTRA) $(LEAKS) $(STDIN) $(FORM)
+		rm -f $(EXTRA) $(LEAKS) $(STDIN) $(FORM) $(MULTI_FD)
 
 re: fclean all
