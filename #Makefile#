@@ -15,7 +15,7 @@ SRCS = test_files.c \
 		../get_next_line.c \
 		munit.c \
 
-NAME = test.out
+EXTRA = extra_tests.out
 
 CC = gcc
 
@@ -27,8 +27,8 @@ all:	 $(NAME) stdin
 
 $(NAME):
 		make -C ../libft/ fclean && make -C ../libft/
-		@$(CC) $(CFLAGS) $(SRCS) $(INCLUDES) -o $(NAME)
-		./$(NAME)
+		@$(CC) $(CFLAGS) $(SRCS) $(INCLUDES) -o $(EXTRA)
+		./$(EXTRA)
 
 leaks:
 		$(CC) $(CFLAGS) leaks_test.c ../get_next_line.c $(INCLUDES) -o leaks_test.out
@@ -50,7 +50,6 @@ clean:
 		rm -f stdin_output
 
 fclean: clean
-		@rm -f $(NAME)
-		@rm -f stdin.out
+		@rm -f
 
 re: fclean all
