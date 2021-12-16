@@ -6,7 +6,7 @@
 /*   By: pniva <pniva@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 09:16:16 by pniva             #+#    #+#             */
-/*   Updated: 2021/12/15 12:23:54 by pniva            ###   ########.fr       */
+/*   Updated: 2021/12/16 10:07:16 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int		main(int argc, char **argv)
 	(void)	argc;
 	(void)	argv;
 	
-	fd_output = open("stdin_output", O_WRONLY | O_CREAT);
+	fd_output = open("stdin_output", O_WRONLY | O_CREAT, 0777);
 	fd = STDIN_FILENO;
 	while (get_next_line(fd, &line) == 1)
 	{

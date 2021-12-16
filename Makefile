@@ -6,16 +6,21 @@
 #    By: pniva <pniva@student.hive.fi>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/09 14:08:13 by pniva             #+#    #+#              #
-#    Updated: 2021/12/16 09:23:36 by pniva            ###   ########.fr        #
+#    Updated: 2021/12/16 11:41:16 by pniva            ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
 
-SRCS = test_files.c \
-		../get_next_line.c \
-		munit.c \
+SRCS = 	../get_next_line.c \
+		munit.c 
 
-NAME = test.out
+EXTRA = extra_test.out
+
+LEAKS = leaks_test.out
+
+STDIN = stdin_test.out
+
+FORM = forms_test.out
 
 CC = gcc
 
@@ -23,34 +28,80 @@ CFLAGS = -Wall -Werror -Wextra
 
 INCLUDES = -I ../ -I ../libft/includes -L ../libft -lft
 
-all:	 $(NAME) stdin
+all:	 $(EXTRA) $(STDIN) $(LEAKS) $(FORM)
 
-$(NAME):
+test_all: basic middle advanced error test_leaks test_stdin
+
+$(EXTRA):
 		make -C ../libft/ fclean && make -C ../libft/
-		@$(CC) $(CFLAGS) $(SRCS) $(INCLUDES) -o $(NAME)
-		./$(NAME)
+		$(CC) $(CFLAGS) $(SRCS) test_files.c $(INCLUDES) -o $(EXTRA)
 
-leaks:
-		$(CC) $(CFLAGS) leaks_test.c ../get_next_line.c $(INCLUDES) -o leaks_test.out
+$(LEAKS):
+		$(CC) $(CFLAGS) leaks_test.c $(SRCS) $(INCLUDES) -o $(LEAKS)
 
 test_leaks:
-		valgrind --leak-check=full -v ./leaks_test.out
+		valgrind --leak-check=full ./$(LEAKS)
 
-stdin:
-		@$(CC) $(CFLAGS) stdin_test.c ../get_next_line.c ../libft/libft.a \
-		$(INCLUDES) -o stdin.out
-		cat test_one_long_line | ./stdin.out
-		diff test_one_long_line stdin_output
+$(STDIN):
+		$(CC) $(CFLAGS) stdin_test.c $(SRCS) $(INCLUDES) -o $(STDIN)
 
-form:
-		$(CC) $(CFLAGS) -g form_tests.c ../get_next_line.c $(INCLUDES) -o form_tests.out
+test_stdin:
+		cat test_one_long_line | ./$(STDIN)
+		@diff test_one_long_line stdin_output
+		@cmp -s test_one_long_line stdin_output; \
+		RETVAL=$$?; \
+		if [ $$RETVAL -eq 0 ]; then \
+            echo "OK"; \
+		else \
+            echo "ERROR in reading from stdin"; \
+		fi
+
+$(FORM):
+		$(CC) $(CFLAGS) -g form_tests.c $(SRCS) $(INCLUDES) -o $(FORM)
+
+basic:
+		@bash change_buff_size.sh 8
+		cat 1_8_char_line | ./forms_test.out
+		cat 2_8_char_lines | ./forms_test.out
+		cat 4_8_char_lines | ./forms_test.out
+		./forms_test.out 1_8_char_line
+		./forms_test.out 2_8_char_lines
+		./forms_test.out 4_8_char_lines
+
+middle:
+		cat 1_16_char_line | ./forms_test.out
+		cat 2_16_char_lines | ./forms_test.out
+		cat 4_16_char_lines | ./forms_test.out
+		./forms_test.out 1_16_char_line
+		./forms_test.out 2_16_char_lines
+		./forms_test.out 4_16_char_lines
+
+advanced:
+		cat 1_4_char_line | ./forms_test.out
+		cat 2_4_char_lines | ./forms_test.out
+		cat 4_4_char_lines | ./forms_test.out
+		./forms_test.out 1_4_char_line
+		./forms_test.out 2_4_char_lines
+		./forms_test.out 4_4_char_lines
+		./forms_test.out 4_chars_no_nl
+		./forms_test.out 8_chars_no_nl
+		./forms_test.out 16_chars_no_nl
+
+error:
+		@bash change_buff_size.sh 1
+		@./$(EXTRA)
+		@bash change_buff_size.sh 32
+		@./$(EXTRA)
+		@bash change_buff_size.sh 9999
+		@./$(EXTRA)
+		@bash change_buff_size.sh 10000000
+		@./$(EXTRA)
 
 clean:
 		make -C ../libft clean
 		rm -f stdin_output
 
 fclean: clean
-		@rm -f $(NAME)
-		@rm -f stdin.out
+		rm -f $(EXTRA) $(LEAKS) $(STDIN) $(FORM)
 
 re: fclean all

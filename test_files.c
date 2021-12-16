@@ -6,7 +6,7 @@
 /*   By: pniva <pniva@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 10:46:30 by pniva             #+#    #+#             */
-/*   Updated: 2021/12/15 09:11:01 by pniva            ###   ########.fr       */
+/*   Updated: 2021/12/16 11:24:32 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,6 +179,11 @@ static MunitResult	test_error_handling(const MunitParameter params[], void *data
 	fd = open("test_file_empty_lines", O_RDONLY);
 	gnl_return = get_next_line(fd, NULL);
 	munit_assert_int(gnl_return, ==, -1);
+
+	fd = 42;
+	gnl_return = get_next_line(fd, &line);
+	munit_assert_int(gnl_return, ==, -1);
+	
 	return MUNIT_OK;
 }
 

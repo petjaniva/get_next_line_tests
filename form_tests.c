@@ -6,7 +6,7 @@
 /*   By: pniva <pniva@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 14:55:24 by pniva             #+#    #+#             */
-/*   Updated: 2021/12/16 09:53:22 by pniva            ###   ########.fr       */
+/*   Updated: 2021/12/16 11:17:16 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,12 @@ void	read_fd(int fd)
 			assert(strcmp(line, "abcdefghijklmno") == 0);
 		else if(strlen(line) == 3)
 			assert(strcmp(line, "123") == 0);
+		else if(strlen(line) == 4)
+			assert(strcmp(line, "1234") == 0);
+		else if(strlen(line) == 8)
+			assert(strcmp(line, "12345678") == 0);
+		else if (strlen(line) == 16)
+			assert(strcmp(line, "abcdefghijklmnop") == 0);
 		else
 			assert(0);
 	}
