@@ -6,13 +6,14 @@
 /*   By: pniva <pniva@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 09:16:16 by pniva             #+#    #+#             */
-/*   Updated: 2021/12/16 13:14:10 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/03 14:29:03 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fcntl.h>
 #include "get_next_line.h"
 #include <stdio.h>
+#include <string.h>
 
 
 int		main(int argc, char **argv)
@@ -28,7 +29,7 @@ int		main(int argc, char **argv)
 	fd = STDIN_FILENO;
 	while (get_next_line(fd, &line) == 1)
 	{
-		write(fd_output, line, ft_strlen(line));
+		write(fd_output, line, strlen(line));
 		free(line);
 	}
 	close(fd);

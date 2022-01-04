@@ -6,10 +6,10 @@
 /*   By: pniva <pniva@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 11:45:17 by pniva             #+#    #+#             */
-/*   Updated: 2021/12/16 12:50:05 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/03 14:30:08 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <strings.h>
+#include <string.h>
 #include <ctype.h>
 #include <limits.h>
 #include "get_next_line.h"

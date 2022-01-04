@@ -6,17 +6,18 @@
 /*   By: pniva <pniva@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 14:55:24 by pniva             #+#    #+#             */
-/*   Updated: 2021/12/16 11:45:33 by pniva            ###   ########.fr       */
+/*   Updated: 2022/01/03 14:29:49 by pniva            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <strings.h>
+#include <string.h>
 #include <ctype.h>
 #include <limits.h>
 #include "get_next_line.h"
 #include <fcntl.h>
 #include <assert.h>
 #include <stdio.h>
+
 
 void	read_fd(int fd)
 {
