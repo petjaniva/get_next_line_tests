@@ -6,7 +6,7 @@
 #    By: pniva <pniva@student.hive.fi>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/09 14:08:13 by pniva             #+#    #+#              #
-#    Updated: 2021/12/16 13:18:22 by pniva            ###   ########.fr        #
+#    Updated: 2022/01/05 09:29:38 by pniva            ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -59,6 +59,7 @@ stdin:
 		fi
 
 $(FORM):
+		@bash change_buff_size.sh 8
 		$(CC) $(CFLAGS) form_tests.c $(SRCS) $(INCLUDES) -o $(FORM)
 
 $(MULTI_FD):
@@ -68,7 +69,6 @@ multi_fd:
 		./$(MULTI_FD)
 
 basic:
-		@bash change_buff_size.sh 8
 		cat ./test_files/1_8_char_line | ./forms_test.out
 		cat ./test_files/2_8_char_lines | ./forms_test.out
 		cat ./test_files/4_8_char_lines | ./forms_test.out
@@ -97,12 +97,16 @@ advanced:
 
 error:
 		@bash change_buff_size.sh 1
+		@$(CC) $(CFLAGS) $(SRCS) test_files.c $(INCLUDES) -o $(EXTRA)
 		@./$(EXTRA)
 		@bash change_buff_size.sh 32
+		@$(CC) $(CFLAGS) $(SRCS) test_files.c $(INCLUDES) -o $(EXTRA)
 		@./$(EXTRA)
 		@bash change_buff_size.sh 9999
+		@$(CC) $(CFLAGS) $(SRCS) test_files.c $(INCLUDES) -o $(EXTRA)
 		@./$(EXTRA)
 		@bash change_buff_size.sh 10000000
+		@$(CC) $(CFLAGS) $(SRCS) test_files.c $(INCLUDES) -o $(EXTRA)
 		@./$(EXTRA)
 
 clean:
